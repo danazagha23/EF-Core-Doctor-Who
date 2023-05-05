@@ -11,10 +11,6 @@ namespace DoctorWho.Db
         public DbSet<Enemy> Enemies { get; set; }
         public DbSet<Episode> Episodes { get; set; }
 
-        //CLR methods
-        public string Companions_Function(int EpisodeId) => throw new NotSupportedException();
-        public string Enemies_Function(int EpisodeId) => throw new NotSupportedException();
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
