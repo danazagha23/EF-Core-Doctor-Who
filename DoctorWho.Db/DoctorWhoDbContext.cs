@@ -11,6 +11,10 @@ namespace DoctorWho.Db
         public DbSet<Enemy> Enemies { get; set; }
         public DbSet<Episode> Episodes { get; set; }
 
+        public DbSet<EpisodeView> ViewEpisodes { get; set; }
+        public DbSet<CompanionsSProc> ThreeMostFrequentlyAppearingCompanions { get; set; }
+        public DbSet<EnemiesSProc> ThreeMostFrequentlyAppearingEnemies { get; set; }
+
         //CLR methods
         public string Companions_Function(int EpisodeId) => throw new NotSupportedException();
         public string Enemies_Function(int EpisodeId) => throw new NotSupportedException();
@@ -234,6 +238,17 @@ namespace DoctorWho.Db
                 new EpisodeEnemy { EpisodeEnemyId = 5, EnemyId = 5, EpisodeId = 5 }
                 );
 
+            //Functions-View-SProc Constraint
+            modelBuilder.HasDbFunction(typeof(DoctorWhoDbContext).GetMethod(nameof(Companions_Function), new[] { typeof(int) }))
+                .HasName("fnCompanions");
+
+            modelBuilder.HasDbFunction(typeof(DoctorWhoDbContext).GetMethod(nameof(Enemies_Function), new[] { typeof(int) }))
+                .HasName("fnEnemies");
+
+            modelBuilder.Entity<EpisodeView>().HasNoKey().ToView("ViewEpisodes");
+
+            modelBuilder.Entity<CompanionsSProc>().HasNoKey();
+            modelBuilder.Entity<EnemiesSProc>().HasNoKey();
         }
     }
 }
