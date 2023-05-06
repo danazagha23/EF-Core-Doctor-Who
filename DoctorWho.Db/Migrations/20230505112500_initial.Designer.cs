@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorWho.Db.Migrations
 {
     [DbContext(typeof(DoctorWhoDbContext))]
-    [Migration("20230505091730_initial")]
+    [Migration("20230505112500_initial")]
     partial class initial
     {
         /// <inheritdoc />
