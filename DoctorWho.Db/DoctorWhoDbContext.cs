@@ -10,8 +10,6 @@ namespace DoctorWho.Db
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Enemy> Enemies { get; set; }
         public DbSet<Episode> Episodes { get; set; }
-        public DbSet<EpisodeCompanion> EpisodeCompanions { get; set; }
-        public DbSet<EpisodeEnemy> EpisodeEnemies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -231,6 +229,7 @@ namespace DoctorWho.Db
                 new EpisodeEnemy { EpisodeEnemyId = 4, EnemyId = 4, EpisodeId = 4 },
                 new EpisodeEnemy { EpisodeEnemyId = 5, EnemyId = 5, EpisodeId = 5 }
                 );
+
         }
     }
 }
