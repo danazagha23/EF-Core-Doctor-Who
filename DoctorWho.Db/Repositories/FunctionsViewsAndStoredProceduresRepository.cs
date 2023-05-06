@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db
 {
-    public class FunctionsViewsAndStoredProcedures
+    public class FunctionsViewsAndStoredProceduresRepository
     {
         public static void Ex_Companions_Function(int EpisodeId)
         {
