@@ -18,25 +18,28 @@ DoctorWhoDbContext.context.Database.EnsureCreated();
 
 //----- Create new Author -----
 
-CreateUpdateDelete.CreateAuthor("New-Author");
+//DbMethods.CreateAuthor("New-Author");
 
-//----- Update New-Author with id = 6 -----
+////----- Update New-Author with id = 6 -----
 
-var author = DoctorWhoDbContext.context.Authors.Find(6);
+//var author = DoctorWhoDbContext.context.Authors.Find(6);
 
-author.AuthorName = "New-Author (Updated !)";
+//author.AuthorName = "New-Author (Updated !)";
 
-Console.WriteLine(DoctorWhoDbContext.context.ChangeTracker.DebugView.LongView);
+//Console.WriteLine(DoctorWhoDbContext.context.ChangeTracker.DebugView.LongView);
 
-CreateUpdateDelete.UpdateAuthor();
+//DbMethods.UpdateAuthor();
 
-Console.WriteLine(DoctorWhoDbContext.context.ChangeTracker.DebugView.LongView);
+//Console.WriteLine(DoctorWhoDbContext.context.ChangeTracker.DebugView.LongView);
 
-//----- Delete New-Author -----
+////----- Delete New-Author -----
 
-CreateUpdateDelete.DeleteAuthor(author);
+//DbMethods.DeleteAuthor(author);
 
-Console.WriteLine(DoctorWhoDbContext.context.ChangeTracker.DebugView.LongView);
+//Console.WriteLine(DoctorWhoDbContext.context.ChangeTracker.DebugView.LongView);
 
+//----- GetEnemyById -----
 
+var enemy = DbMethods.GetEnemyById(2);
+Console.WriteLine(enemy.EnemyName, enemy.Description);
 

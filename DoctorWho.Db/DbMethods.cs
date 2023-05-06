@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db
 {
-    public class CreateUpdateDelete
+    public class DbMethods
     {
         //Companions Methods
         public static void CreateCompanion(string companionName, string whoPlayed)
@@ -28,6 +28,12 @@ namespace DoctorWho.Db
             DoctorWhoDbContext.context.Companions.Remove(companion);
             DoctorWhoDbContext.context.SaveChanges();
         }
+        public static Companion GetCompanionById(int id)
+        {
+            var companion = DoctorWhoDbContext.context.Companions.Find(id);
+            if (companion != null) return companion;
+            else throw new NullReferenceException("No enemies with the provided Id exist in the database");
+        }
 
         //Enemies Methods
         public static void CreateEnemy(string enemyName, string description)
@@ -47,6 +53,38 @@ namespace DoctorWho.Db
             DoctorWhoDbContext.context.Enemies.Remove(enemy);
             DoctorWhoDbContext.context.SaveChanges();
         }
+        public static Enemy GetEnemyById(int id)
+        {
+            var enemy = DoctorWhoDbContext.context.Enemies.Find(id);
+            if(enemy != null) return enemy;
+            else throw new NullReferenceException("No enemies with the provided Id exist in the database");
+        }
+
+        //EpisodeEnemies Methods
+        public static void AddEnemyToEpisode(Enemy enemy, int EpisodeId)
+        {
+            if (enemy == null) throw new ArgumentNullException("Please provide an enemy instance that is not null");
+            var episode = DoctorWhoDbContext.context.Episodes.Find(EpisodeId);
+            if(episode != null)
+            {
+                episode.EpisodeEnemies.Add(new EpisodeEnemy { EnemyId = enemy.EnemyId, EpisodeId = EpisodeId });
+                DoctorWhoDbContext.context.SaveChanges();
+            }
+            else throw new InvalidOperationException("No episodes with the provided Id exist in the database!");
+        }
+
+        //EpisodeCompanion Methods
+        public static void AddCompanionToEpisode(Companion companion, int EpisodeId)
+        {
+            if (companion == null) throw new ArgumentNullException("Please provide a companion instance that is not null");
+            var episode = DoctorWhoDbContext.context.Episodes.Find(EpisodeId);
+            if (episode != null)
+            {
+                episode.EpisodeCompanions.Add(new EpisodeCompanion { CompanionId = companion.CompanionId, EpisodeId = EpisodeId });
+                DoctorWhoDbContext.context.SaveChanges();
+            }
+            else throw new InvalidOperationException("No episodes with the provided Id exist in the database!");
+        }
 
         //Doctors Methods
         public static void CreateDoctor(int doctorNumber, string doctorName, DateTime birthDate, DateTime firstEpisodeDate, DateTime lastEpisodeDate)
@@ -65,6 +103,10 @@ namespace DoctorWho.Db
             if (doctor == null) throw new ArgumentNullException("Cannot remove a null Doctor from the Doctors table");
             DoctorWhoDbContext.context.Doctors.Remove(doctor);
             DoctorWhoDbContext.context.SaveChanges();
+        }
+        public static List<Doctor> GetAllDoctors()
+        {
+            return DoctorWhoDbContext.context.Doctors.ToList();
         }
 
         //Authors Methods
