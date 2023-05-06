@@ -5,6 +5,7 @@ namespace DoctorWho.Db
 {
     public class DoctorWhoDbContext : DbContext
     {
+        public static DoctorWhoDbContext context = new DoctorWhoDbContext();
         public DbSet<Author> Authors { get; set; }
         public DbSet<Companion> Companions { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
@@ -24,6 +25,7 @@ namespace DoctorWho.Db
             optionsBuilder.UseSqlServer(
                  @"Server=DESKTOP-LQ3BMKQ;Database=DoctorWhoCore;Trusted_Connection=True;TrustServerCertificate=Yes"
             );
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
